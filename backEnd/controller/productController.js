@@ -19,12 +19,7 @@ exports.getProducts = async (req, res, next) => {
   }
 
   const products = await buildQuery().paginate(resPerPage).query;
-  // const totalCount=await Product.countDocuments({})
-  // await new Promise(resolve=>setTimeout(resolve,3000))
-  //used to delay the request
-  // return(
-  //     next(new ErrorHandler("unable to get products"),404)
-  // )
+
   res.status(200).json({
     success: true,
     count: productsCount,
