@@ -5,11 +5,7 @@ const order = require("../modules/order");
 const Product = require("../modules/productModule");
 exports.createOrder = asyncErrorHandle(async (req, res, next) => {
     const {
-        // shippingInfo,
-        // orderItems,
-        // taxPrice,  
-        // shippingPrice, 
-        // totalPrice,
+      
         orderItems,
         shippingInfo,
         itemsPrice,
@@ -20,13 +16,7 @@ exports.createOrder = asyncErrorHandle(async (req, res, next) => {
 
     } = req.body;
     const order = await Order.create({
-        // shippingInfo,
-        // orderItems,
-        // taxPrice,
-        // shippingPrice,
-        // totalPrice,
-        // createdAt:Date.now(),
-        // user:req.user.id    
+        
         orderItems,
         shippingInfo,
         itemsPrice,
@@ -43,25 +33,11 @@ exports.createOrder = asyncErrorHandle(async (req, res, next) => {
     })
 })
 
-//get single order
 
-// exports.getSingleOrder=asyncErrorHandle(async(req,res,next)=>{
-//     const order=await Order.findById(req.params.id).populate("user","name email")
-
-//     if(!order) return next(new ErrorHandler("order not found this"+`${req.params.id}`),404)
-
-//     res.status(200).json({
-//         success:true,
-//         order
-//     })
-// })
 exports.getSingleOrders = asyncErrorHandle(async (req, res, next) => {
-    // const order = await Order.findById(req.params.id).populate('user', 'name email');
     const order = await Order.findById(req.params.id)
 
 
-    // const order = await Order.findById(req.params.id).populate('user', 'name email')
-    // model.findOne({}, undefined, { populate: {path: 'fooo', options: {strictPopulate: false}}, option: {strictPopulate: false}, })
     if (!order) return next(new ErrorHandler("invalid. order not found", 404))
 
     res.status(201).json({
